@@ -144,3 +144,16 @@
 .dn__greet {
   color: var(--ink-dim);
 }
+
+.dn__sky {
+  /* starting colours (dawn) — GSAP tweens these variables */
+  --top: #8fb8ff;
+  --bottom: #ffc4d6;
+  --ground: #7fd6a0;
+
+  position: relative;
+  width: 100%;          /* ← new: absolute children don't give it a width */
+  height: 100vh;
+  overflow: hidden;
+  /* …background stays the same */
+}

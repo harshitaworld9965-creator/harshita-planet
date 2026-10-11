@@ -73,8 +73,12 @@ export default function DayNight() {
 
       // 3. night: clouds dim, moon rises, stars appear
       tl.to('.dn__cloud', { autoAlpha: 0.2, duration: 0.8 }, 2.6)
-        .fromTo('.dn__moon', { y: () => vh() * 0.5 }, { y: 0, duration: 1, ease: 'power1.out' }, 2.8)
-        .to('.dn__star', { autoAlpha: 1, duration: 0.6, stagger: { each: 0.03, from: 'random' } }, 2.9)
+        .fromTo(
+          '.dn__moon',
+          { y: () => vh() * 0.5, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration: 1, ease: 'power1.out' },
+          2.8
+        )        .to('.dn__star', { autoAlpha: 1, duration: 0.6, stagger: { each: 0.03, from: 'random' } }, 2.9)
         .to({}, { duration: 0.5 }); // empty tween = a little pause at night before unpinning
     },
     { scope: root }
