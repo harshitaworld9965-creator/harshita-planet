@@ -1,0 +1,128 @@
+.ft {
+  background: var(--bg);
+  padding-bottom: 4rem;
+}
+
+.ft__inner {
+  display: grid;
+  justify-items: center;
+  gap: 1.75rem;
+  text-align: center;
+}
+
+/* the planet turns; the girl stays on top, walking in place */
+.ft__world {
+  position: relative;
+  width: clamp(200px, 26vw, 300px);
+  margin-top: 4rem; /* room for the girl standing on top */
+}
+
+.ft__planet {
+  width: 100%;
+  animation: spin 40s steps(160) infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.ft__girl {
+  position: absolute;
+  left: 50%;
+  bottom: 82%;               /* nudge this if her feet float or sink */
+  width: 28%;
+  margin-left: -14%;         /* half her width → centred */
+  aspect-ratio: 253 / 338;
+  background: url('/img/girl-walk.png') 0 0 / 400% 100% no-repeat;
+  image-rendering: pixelated;
+  animation: walk 0.6s steps(4, jump-none) infinite; /* keyframes live in Intro.css */
+}
+
+.ft__title {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: clamp(2rem, 7vw, 4.5rem);
+  color: var(--pink);
+  text-shadow:
+    var(--px) var(--px) 0 var(--bg-2),
+    calc(var(--px) * 2) calc(var(--px) * 2) 0 var(--ink);
+}
+
+.ft__letter {
+  display: inline-block;
+}
+
+.ft__continue {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  letter-spacing: 0.1em;
+  color: var(--sun);
+}
+
+.ft__count {
+  display: inline-block;
+  min-width: 1ch; /* stops the text jiggling as digits change */
+}
+
+.ft__again {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  color: var(--ink);
+  cursor: pointer;
+  animation: blink 1.2s steps(1) infinite; /* keyframes live in Hero.css */
+}
+
+/* pressing a pixel button = it moves INTO its own shadow */
+.ft__again:active,
+.ft__link:active {
+  transform: translate(var(--px), var(--px));
+  box-shadow: 0 0 0 0 var(--ink);
+}
+
+.ft__links {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.ft__link {
+  display: inline-block;
+  padding: 0.5rem 1.1rem;
+  color: var(--mint);
+  text-decoration: none;
+  transition: background 0.2s steps(2);
+}
+
+.ft__link:hover,
+.ft__link:focus-visible {
+  background: var(--bg);
+}
+
+.ft__credits {
+  display: grid;
+  gap: 0.4rem;
+  margin-top: 1rem;
+  font-size: 0.95rem;
+}
+
+.ft__credit {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.ft__credit dt {
+  color: var(--ink-dim);
+}
+
+.ft__credit dt::after {
+  content: ' ·';
+}
+
+.ft__credit dd {
+  color: var(--ink);
+}

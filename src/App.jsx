@@ -4,7 +4,7 @@ import Loves from './components/Loves.jsx';
 import Room from './components/Room.jsx';
 import Stickers from './components/Stickers.jsx';
 import DayNight from './components/DayNight.jsx';
-// import Footer from './components/Footer.jsx';
+ import Footer from './components/Footer.jsx';
 
 export default function App() {
   return (
@@ -15,7 +15,7 @@ export default function App() {
       <Room /> 
       <Stickers /> 
       <DayNight /> 
-      {/* <Footer /> */}
+      <Footer /> 
     </main>
   );
 }
