@@ -1,0 +1,75 @@
+.stickers {
+  background: var(--bg);
+}
+
+.stickers__inner {
+  width: min(900px, 100%);
+  display: grid;
+  gap: 2rem;
+  justify-items: center;
+}
+
+.stickers__title {
+  text-align: center;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  color: var(--pink);
+  text-shadow: var(--px) var(--px) 0 var(--bg-2);
+}
+
+.stickers__level {
+  display: block;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: var(--sun);
+  text-shadow: none;
+  margin-bottom: 0.5rem;
+}
+
+/* a notebook page: red margin line + blue ruled lines, all gradients */
+.stickers__board {
+  position: relative;
+  width: 100%;
+  height: clamp(420px, 62vh, 600px);
+  border-color: var(--ink);
+  background:
+    linear-gradient(to right, transparent 0 46px, #ff8fab 46px 49px, transparent 49px),
+    repeating-linear-gradient(to bottom, transparent 0 31px, #d9c8f0 31px 33px),
+    #fdf6e3;
+}
+
+/* outer: GSAP's slap-on animation (scale + rotation) */
+.sticker {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: clamp(70px, 11vw, 120px);
+}
+
+/* inner: Draggable (x + y) and the tilt / lift */
+.sticker__drag {
+  cursor: grab;
+  touch-action: none; /* lets fingers drag instead of scrolling the page */
+}
+
+.sticker__drag img {
+  width: 100%;
+  filter: drop-shadow(4px 4px 0 rgba(27, 20, 51, 0.35));
+  transition: filter 0.2s steps(2);
+  user-select: none;
+}
+
+.sticker__drag.is-dragging {
+  cursor: grabbing;
+}
+
+.sticker__drag.is-dragging img {
+  filter: drop-shadow(10px 12px 0 rgba(27, 20, 51, 0.3));
+}
+
+.stickers__hint {
+  font-family: var(--font-head);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  color: var(--sun);
+  min-height: 1.5em;
+}

@@ -1,0 +1,146 @@
+.dn {
+  padding: 0;
+  display: block;
+}
+
+.dn__sky {
+  /* starting colours (dawn) — GSAP tweens these variables */
+  --top: #8fb8ff;
+  --bottom: #ffc4d6;
+  --ground: #7fd6a0;
+
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  /* 4 hard bands blended between the two variables = retro sky */
+  background: linear-gradient(
+    to bottom,
+    var(--top) 0 25%,
+    color-mix(in srgb, var(--top) 66%, var(--bottom)) 25% 50%,
+    color-mix(in srgb, var(--top) 33%, var(--bottom)) 50% 75%,
+    var(--bottom) 75% 100%
+  );
+}
+
+/* the chunky pixel-circle shape shared by sun and moon */
+.dn__sun-body,
+.dn__moon {
+  clip-path: polygon(
+    30% 0%, 70% 0%, 70% 10%, 90% 10%, 90% 30%, 100% 30%, 100% 70%, 90% 70%,
+    90% 90%, 70% 90%, 70% 100%, 30% 100%, 30% 90%, 10% 90%, 10% 70%, 0% 70%,
+    0% 30%, 10% 30%, 10% 10%, 30% 10%
+  );
+}
+
+/* outer: GSAP moves x. sits on the horizon, centred on its own middle */
+.dn__sun {
+  --size: clamp(80px, 10vw, 140px);
+  position: absolute;
+  left: 0;
+  bottom: 20vh;
+  margin-left: calc(var(--size) / -2);
+  /* filter on the PARENT so the glow follows the clipped pixel shape */
+  filter: drop-shadow(0 0 24px rgba(255, 209, 102, 0.8));
+}
+
+/* inner: GSAP moves y */
+.dn__sun-body {
+  position: relative;
+  width: var(--size);
+  aspect-ratio: 1;
+  background: #ffd166;
+}
+
+/* two little closed eyes: one square + its box-shadow copy */
+.dn__sun-body::before {
+  content: '';
+  position: absolute;
+  top: 44%;
+  left: 28%;
+  width: 14%;
+  height: 6%;
+  background: #b5651d;
+  box-shadow: calc(var(--size) * 0.3) 0 0 #b5651d;
+}
+
+.dn__moon {
+  position: absolute;
+  top: 14%;
+  right: 16%;
+  width: clamp(70px, 8vw, 110px);
+  aspect-ratio: 1;
+  background:
+    /* two craters drawn with gradients */
+    radial-gradient(circle at 35% 40%, #e6dcc4 0 12%, transparent 13%),
+    radial-gradient(circle at 65% 68%, #e6dcc4 0 9%, transparent 10%),
+    #fdf6e3;
+}
+
+.dn__stars {
+  position: absolute;
+  inset: 0;
+}
+
+.dn__star {
+  position: absolute;
+  opacity: 0;
+  visibility: hidden; /* autoAlpha starts from here */
+}
+
+.dn__cloud {
+  position: absolute;
+  width: clamp(140px, 18vw, 260px);
+}
+.dn__cloud--1 { top: 18%; left: 10%; }
+.dn__cloud--2 { top: 32%; right: 6%; }
+
+/* outer cloud: GSAP fades it. inner img: CSS drifts it */
+.dn__cloud img {
+  animation: drift 6s steps(8) infinite alternate;
+}
+.dn__cloud--2 img { animation-duration: 8s; }
+
+@keyframes drift {
+  to { transform: translateX(40px); }
+}
+
+/* the hill — sits above the sun so the sun can sink behind it */
+.dn__ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 20vh;
+  z-index: 2;
+  background: var(--ground);
+  box-shadow: inset 0 10px 0 rgba(255, 255, 255, 0.18);
+}
+
+.dn__hud {
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  padding: 1rem 1.75rem;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.dn__level {
+  font-family: var(--font-head);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--sun);
+}
+
+.dn__clock {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.dn__greet {
+  color: var(--ink-dim);
+}
