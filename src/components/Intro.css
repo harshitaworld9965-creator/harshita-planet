@@ -1,0 +1,90 @@
+.intro {
+  padding: 0;
+  overflow: hidden;
+  /* continues the hero's banded sky, getting warmer toward the ground */
+  background: linear-gradient(
+    to bottom,
+    #4a2c6b 0 35%,
+    #5c3478 35% 60%,
+    #6e3d84 60% 100%
+  );
+}
+
+.intro__label {
+  position: absolute;
+  top: 2rem;
+  left: 1.5rem;
+  font-family: var(--font-head);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--sun);
+}
+
+/* all boxes share one grid cell, so they stack on top of each other */
+.intro__boxes {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(560px, 90vw);
+  display: grid;
+}
+
+.intro__box {
+  grid-area: 1 / 1;
+  position: relative;
+  padding: 1.25rem 1.5rem 1.75rem;
+  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+}
+
+/* the little blinking "next" arrow every RPG text box has */
+.intro__box::after {
+  content: '▼';
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.4rem;
+  font-size: 0.7rem;
+  color: var(--sun);
+  animation: blink 1s steps(1) infinite; /* keyframes live in Hero.css */
+}
+
+.intro__ground {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 14vh;
+  /* grass highlight, grass, then dirt — hard stops, no blending */
+  background: linear-gradient(
+    to bottom,
+    #9ef5c2 0 10px,
+    #5fcf8f 10px 24px,
+    #6b4a3a 24px 100%
+  );
+}
+
+.intro__walker {
+  position: absolute;
+  left: 24px;
+  bottom: calc(14vh - 8px);   /* feet sink slightly into the grass */
+  width: clamp(110px, 14vw, 170px);
+  aspect-ratio: 253 / 338;    /* exact shape of one frame */
+  z-index: 2;
+}
+
+.intro__girl {
+  width: 100%;
+  height: 100%;
+  background: url('/img/girl-walk.png') 0 0 / 400% 100% no-repeat;
+  image-rendering: pixelated;
+}
+
+.intro__girl.is-walking {
+  animation: walk 0.5s steps(4, jump-none) infinite;
+}
+
+/* 0% → 100% in 4 jumps lands exactly on frames 1, 2, 3, 4 */
+@keyframes walk {
+  from { background-position: 0% 0; }
+  to   { background-position: 100% 0; }
+}

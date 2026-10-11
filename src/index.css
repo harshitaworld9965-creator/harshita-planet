@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&family=Pixelify+Sans:wght@400;500;600&display=swap');
+
+:root {
+  /* palette — retro dusk */
+  --bg: #1b1433;
+  --bg-2: #2a1f4d;
+  --ink: #fdf6e3;
+  --ink-dim: #b9a9d6;
+  --pink: #ff8fab;
+  --mint: #9ef5c2;
+  --sun: #ffd166;
+  --sky-day: #8fd3ff;
+  --sky-night: #1b1433;
+
+  --font-head: 'Silkscreen', monospace;
+  --font-body: 'Pixelify Sans', monospace;
+
+  --px: 4px;            /* one "pixel" unit for borders & shadows */
+  --radius: 0;          /* pixel art = sharp corners */
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: auto; }   /* GSAP handles smoothness; native smooth fights ScrollTrigger */
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: none;    /* keeps text looking crisp/pixelly */
+}
+
+h1, h2, h3 {
+  font-family: var(--font-head);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+/* every image on the site is pixel art — never blur it when scaled */
+img, canvas {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  display: block;
+  max-width: 100%;
+}
+
+/* reusable pixel border: a hard shadow instead of rounded CSS borders */
+.pixel-box {
+  border: var(--px) solid var(--ink);
+  box-shadow: var(--px) var(--px) 0 0 var(--ink);
+  background: var(--bg-2);
+}
+
+/* a section = one "level". min-height so each has room to breathe */
+.level {
+  position: relative;
+  min-height: 100vh;
+  padding: 6rem 1.5rem;
+  display: grid;
+  place-items: center;
+}
+
+/* tiny CRT scanline overlay on the whole page — subtle, retro */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0 2px,
+    rgba(0,0,0,0.12) 2px 3px
+  );
+  mix-blend-mode: multiply;
+  z-index: 9999;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
